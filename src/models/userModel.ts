@@ -60,7 +60,7 @@ export class UserStore {
     }
   }
 
-  async show(id: string): Promise<User | null> {
+  async show(id: string): Promise<User> {
     try {
       const conn = await Client.connect();
       const sql = 'SELECT * FROM users WHERE id=($1)';
@@ -76,18 +76,15 @@ export class UserStore {
     }
   }
 
-  async authenticate(id: string, password: string): Promise<User | null> {
+  async authenticate(id: String, password: string): Promise<User | null> {
     const conn = await Client.connect();
-    const sql = 'SELECT password_digest FROM users WHERE userid=($1)';
+    const sql = 'SELECT password_digest FROM users WHERE id=($1)';
 
     const result = await conn.query(sql, [id]);
 
-    console.log((password + process.env.PEPPER) as string);
 
     if (result.rows.length) {
       const user = result.rows[0];
-
-      console.log(user);
 
       if (
         bcrypt.compareSync(

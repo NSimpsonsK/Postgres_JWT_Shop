@@ -30,7 +30,6 @@ export class ProductStore {
       const sql =
         'INSERT INTO product (name, price, category) VALUES($1, $2, $3) RETURNING *';
 
-      console.log("TEST" + p.name,p.price,p.category);
       const result = await conn.query(sql, [p.name, p.price, p.category]);
       const product = result.rows[0];
 
@@ -48,10 +47,8 @@ export class ProductStore {
       const sql = 'SELECT * FROM product WHERE id=($1)';
 
       const result = await conn.query(sql, [id]);
-      console.log("TEST" + id);
       const product = result.rows[0];
 
-      console.log(product);
       conn.release();
       return product;
     } catch (error) {
@@ -59,16 +56,14 @@ export class ProductStore {
     }
   }
 
-  async showByCategory(category: string): Promise<Product[] | null> {
+  async showByCategory(category: String): Promise<Product[] | null> {
     try {
       const conn = await Client.connect();
-      console.log(category);
       const sql = 'SELECT * FROM product WHERE category=($1)';
 
       const result = await conn.query(sql, [category]);
       const product = result.rows;
 
-      console.log(product);
       conn.release();
       return product;
     } catch (error) {
