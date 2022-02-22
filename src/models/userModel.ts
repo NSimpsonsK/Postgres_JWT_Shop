@@ -19,10 +19,10 @@ export class UserStore {
 
       const result = await conn.query(sql);
       const user = result.rows;
-      
+
       //Remove hashed Password from Query result
-      user.forEach(element => {
-        element.password_digest="";
+      user.forEach((element) => {
+        element.password_digest = '';
       });
 
       conn.release();
@@ -33,7 +33,11 @@ export class UserStore {
     }
   }
 
-  async create(firstname: String, lastname:String, password: String): Promise<User> {
+  async create(
+    firstname: String,
+    lastname: String,
+    password: String
+  ): Promise<User> {
     try {
       if (process.env.PEPPER) {
         const conn = await Client.connect();
@@ -45,7 +49,7 @@ export class UserStore {
         );
         const result = await conn.query(sql, [firstname, lastname, hash]);
         const user = result.rows[0];
-        user.password_digest="";
+        user.password_digest = '';
 
         conn.release();
 
@@ -54,9 +58,7 @@ export class UserStore {
         throw new Error('Server Error');
       }
     } catch (err) {
-      throw new Error(
-        `unable create user (${firstname} ${lastname}): ${err}`
-      );
+      throw new Error(`unable create user (${firstname} ${lastname}): ${err}`);
     }
   }
 
@@ -67,7 +69,7 @@ export class UserStore {
 
       const result = await conn.query(sql, [id]);
       const user = result.rows[0];
-      user.password_digest="";
+      user.password_digest = '';
 
       conn.release();
       return user;
@@ -81,7 +83,6 @@ export class UserStore {
     const sql = 'SELECT password_digest FROM users WHERE id=($1)';
 
     const result = await conn.query(sql, [id]);
-
 
     if (result.rows.length) {
       const user = result.rows[0];

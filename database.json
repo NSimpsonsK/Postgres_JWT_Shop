@@ -2,16 +2,16 @@
     "defaultEnv": "dev",
     "test": {
       "driver": "pg",
-      "host": {"ENV": "POSTGRES_HOST"},
+      "host": "127.0.0.1",
       "database": "test",
       "user": "full_stack_user",
-      "password": {"ENV": "POSTGRES_PASSWORD"}
+      "password": "password123"
     },
     "dev": {
       "driver": "pg",
-      "host": {"ENV": "POSTGRES_HOST"},
+      "host": "127.0.0.1",
       "database": "dev",
       "user": "full_stack_user",
-      "password": {"ENV": "POSTGRES_PASSWORD"}
+      "password": "password123"
     }
 }

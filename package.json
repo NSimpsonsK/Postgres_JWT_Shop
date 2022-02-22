@@ -9,10 +9,10 @@
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"nodemon src/server.ts\"",
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine",
-    "test2": "SET ENV=test&& db-migrate --env test up && jasmine-ts --random=false && db-migrate --env test reset",
+    "test2": "ENV=test&& db-migrate --env test up && jasmine-ts --random=false && db-migrate --env test reset",
     "tsc": "tsc",
-    "lint": "eslint \"src/**/*.ts\"",
-    "prettier": "prettier --config .prettierrc \"src/**/*.ts\" --write"
+    "lint": "eslint \"**/*.ts\"",
+    "prettier": "prettier --config .prettierrc \"**/*.ts\" --write"
   },
   "author": "Udacity",
   "license": "ISC",

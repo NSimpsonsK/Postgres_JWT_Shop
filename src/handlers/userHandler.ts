@@ -18,7 +18,9 @@ const index = async (_req: Request, res: Response) => {
 
 const show = async (_req: Request, res: Response) => {
   try {
-    const user = await userStore.show(parseInt(_req.url.substring(_req.url.lastIndexOf('/')+1)));
+    const user = await userStore.show(
+      parseInt(_req.url.substring(_req.url.lastIndexOf('/') + 1))
+    );
     res.json(user);
   } catch (err) {
     res.status(400);
@@ -28,7 +30,12 @@ const show = async (_req: Request, res: Response) => {
 
 const create = async (_req: Request, res: Response) => {
   try {
-    const newUser = await userStore.create(_req.body.firstname,_req.body.lastname,_req.body.password);
+    const newUser = await userStore.create(
+      _req.body.firstname,
+      _req.body.lastname,
+      _req.body.password
+    );
+
     var token = jwt.sign(
       { user: newUser },
       process.env.JWT_SECRET_STR as string

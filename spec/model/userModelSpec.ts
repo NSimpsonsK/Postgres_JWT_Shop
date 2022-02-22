@@ -1,19 +1,19 @@
 import { User, UserStore } from '../../src/models/userModel';
 
 const store = new UserStore();
-const firstname= "John";
-const lastname= "Doe";
-const password= "123456789";
+const firstname = 'John';
+const lastname = 'Doe';
+const password = '123456789';
 let user: User;
 
 export const createUser = async (): Promise<User> => {
-  const result = await store.create(firstname,lastname,password);
+  const result = await store.create(firstname, lastname, password);
   expect(result.firstname).toEqual(firstname);
   expect(result.lastname).toEqual(lastname);
   return result;
 };
 
-describe("User Model", () => {
+describe('User Model', () => {
   it('should have an create method', () => {
     expect(store.create).toBeDefined();
   });
@@ -31,7 +31,7 @@ describe("User Model", () => {
   });
 
   it('create method should add a User', async () => {
-    user = await store.create(firstname,lastname,password);
+    user = await store.create(firstname, lastname, password);
     expect(user.firstname).toEqual(firstname);
     expect(user.lastname).toEqual(lastname);
   });
@@ -50,7 +50,7 @@ describe("User Model", () => {
   });
 
   it('authenticate method should return a user', async () => {
-    const result = await store.authenticate(user.id,password as string);
+    const result = await store.authenticate(user.id, password as string);
     expect(result).toBeDefined();
   });
 });

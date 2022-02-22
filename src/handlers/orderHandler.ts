@@ -9,7 +9,7 @@ const orderStore = new OrderStore();
 const show = async (_req: Request, res: Response) => {
   try {
     const orderProducts = await orderStore.showCurrentOrderByUserId(
-      parseInt(_req.url.substring(_req.url.lastIndexOf('/')+1))
+      parseInt(_req.url.substring(_req.url.lastIndexOf('/') + 1))
     );
     res.json(orderProducts);
   } catch (err) {

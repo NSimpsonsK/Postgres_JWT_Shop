@@ -5,20 +5,24 @@ import { createProduct } from './productModelSpec';
 import { createUser } from './userModelSpec';
 
 const store = new OrderStore();
-const status= "active";
-const quantity= 12;
+const status = 'active';
+const quantity = 12;
 
 let user: User;
 let product: Product;
 let order: Order;
 let orderProduct: OrderProduct;
 
-describe("Order Model", () => {
+describe('Order Model', () => {
   beforeAll(async () => {
     user = await createUser();
     product = await createProduct();
-    order = await store.createOrder(user.id,status);
-    orderProduct = await store.createOrderProduct(order.id,quantity,product.id);
+    order = await store.createOrder(user.id, status);
+    orderProduct = await store.createOrderProduct(
+      order.id,
+      quantity,
+      product.id
+    );
   });
 
   it('showCurrentOrderByUserId should return an Order', async () => {

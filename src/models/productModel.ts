@@ -24,7 +24,11 @@ export class ProductStore {
     }
   }
 
-  async create(name: String, price:Number, category: String): Promise<Product> {
+  async create(
+    name: String,
+    price: Number,
+    category: String
+  ): Promise<Product> {
     try {
       const conn = await Client.connect();
       const sql =
