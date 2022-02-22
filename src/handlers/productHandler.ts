@@ -18,7 +18,9 @@ const index = async (_req: Request, res: Response) => {
 
 const show = async (_req: Request, res: Response) => {
   try {
-    const product = await productStore.show(_req.url.substring(_req.url.lastIndexOf('/')+1));
+    const product = await productStore.show(
+      _req.url.substring(_req.url.lastIndexOf('/') + 1)
+    );
     res.json(product);
   } catch (err) {
     res.status(400);
@@ -28,7 +30,9 @@ const show = async (_req: Request, res: Response) => {
 
 const showByCategory = async (_req: Request, res: Response) => {
   try {
-    const products = await productStore.showByCategory(_req.url.substring(_req.url.lastIndexOf('/')+1));
+    const products = await productStore.showByCategory(
+      _req.url.substring(_req.url.lastIndexOf('/') + 1)
+    );
     res.json(products);
   } catch (err) {
     res.status(400);
@@ -38,13 +42,11 @@ const showByCategory = async (_req: Request, res: Response) => {
 
 const create = async (_req: Request, res: Response) => {
   try {
-    const product: Product = {
-      name: _req.body.name,
-      price: _req.body.price,
-      category: _req.body.category
-    };
-    
-    const newProduct = await productStore.create(product);
+    const newProduct = await productStore.create(
+      _req.body.name,
+      _req.body.price,
+      _req.body.category
+    );
     res.json(newProduct);
   } catch (err) {
     res.status(401);
