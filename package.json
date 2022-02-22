@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "pg": "^8.5.1",
+    "supertest": "^6.2.2",
     "typescript": "^4.1.3"
   },
   "devDependencies": {
@@ -36,6 +37,7 @@
     "@types/jasmine": "^3.6.3",
     "@types/jsonwebtoken": "^8.5.8",
     "@types/pg": "^7.14.7",
+    "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
     "eslint": "^8.8.0",
@@ -45,7 +47,7 @@
     "jasmine-spec-reporter": "^6.0.0",
     "jasmine-ts": "^0.3.0",
     "prettier": "^2.2.1",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.5.0",
     "tsc-watch": "^4.2.9"
   }
 }

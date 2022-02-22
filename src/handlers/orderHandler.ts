@@ -20,14 +20,9 @@ const show = async (_req: Request, res: Response) => {
 
 const create = async (_req: Request, res: Response) => {
   try {
-    const Order: Order = {
-      status: _req.body.status,
-      user_id: _req.body.user_id
-    };
-
     const newProduct = await orderStore.createOrder(
-      Order.user_id,
-      Order.status
+      _req.body.user_id,
+      _req.body.status
     );
     res.json(newProduct);
   } catch (err) {
@@ -38,15 +33,10 @@ const create = async (_req: Request, res: Response) => {
 
 const createOrderElements = async (_req: Request, res: Response) => {
   try {
-    const product: OrderProduct = {
-      quantity: _req.body.quantity,
-      product_id: _req.body.product_id,
-      order_id: _req.body.order_id
-    };
     const newProduct = await orderStore.createOrderProduct(
-      product.order_id,
-      product.quantity,
-      product.product_id
+      _req.body.order_id,
+      _req.body.quantity,
+      _req.body.product_id
     );
     res.json(newProduct);
   } catch (err) {

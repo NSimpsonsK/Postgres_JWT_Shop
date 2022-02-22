@@ -1,10 +1,16 @@
-import { Product, ProductStore } from '../productModel';
+import { Product, ProductStore } from '../../src/models/productModel';
 
 const store = new ProductStore();
-const testProduct:Product = {
-  name: "Test Product",
-  price: 22,
-  category: "Test Category"
+const name= "Test Product";
+const price= 22;
+const category= "Test Category";
+
+export const createProduct = async (): Promise<Product> => {
+  const product = await store.create(name,price,category);
+  expect(product.name).toEqual(name);
+  expect(product.price).toEqual(price);
+  expect(product.category).toEqual(category);
+  return product;
 };
 
 describe("Product Model", () => {
@@ -25,12 +31,12 @@ describe("Product Model", () => {
   });
 
   it('create method should add a Product', async () => {
-    const result = await store.create(testProduct);
+    const result = await store.create(name,price,category);
     expect(result).toEqual({
       id: 1,
-      name: testProduct.name,
-      price: testProduct.price,
-      category: testProduct.category
+      name: name,
+      price: price,
+      category: category
     });
   });
 
@@ -38,9 +44,9 @@ describe("Product Model", () => {
     const result = await store.index();
     expect(result).toEqual([{
       id: 1,
-      name: testProduct.name,
-      price: testProduct.price,
-      category: testProduct.category
+      name: name,
+      price: price,
+      category: category
     }]);
   });
 
@@ -48,19 +54,19 @@ describe("Product Model", () => {
     const result = await store.show("1");
     expect(result).toEqual({
       id: 1,
-      name: testProduct.name,
-      price: testProduct.price,
-      category: testProduct.category
+      name: name,
+      price: price,
+      category: category
     });
   });
 
   it('showByCategory method should return a list of products', async () => {
-    const result = await store.showByCategory(testProduct.category);
+    const result = await store.showByCategory(category);
     expect(result).toEqual([{
       id: 1,
-      name: testProduct.name,
-      price: testProduct.price,
-      category: testProduct.category
+      name: name,
+      price: price,
+      category: category
     }]);
   });
 });

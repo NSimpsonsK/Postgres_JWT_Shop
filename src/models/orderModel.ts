@@ -1,13 +1,13 @@
 import Client from '../database';
 
 export type Order = {
-  id?: Number;
+  id: Number;
   status: String;
   user_id: Number;
 };
 
 export type OrderProduct = {
-  id?: Number;
+  id: Number;
   quantity: Number;
   product_id: Number;
   order_id: Number;
@@ -15,7 +15,7 @@ export type OrderProduct = {
 
 export class OrderStore {
   showCurrentOrderByUserId = async (
-    userId: number
+    userId: Number
   ): Promise<OrderProduct[]> => {
     try {
       const conn = await Client.connect();
@@ -35,14 +35,14 @@ export class OrderStore {
     }
   };
 
-  createOrder = async (user_Id: Number, status: String): Promise<Order[]> => {
+  createOrder = async (user_Id: Number, status: String): Promise<Order> => {
     try {
       const conn = await Client.connect();
       const sql =
         'INSERT INTO orders (user_id, order_status) VALUES($1, $2) RETURNING *';
 
       const result = await conn.query(sql, [user_Id, status]);
-      const order: Order[] = result.rows[0];
+      const order: Order = result.rows[0];
 
       conn.release();
 
@@ -56,14 +56,14 @@ export class OrderStore {
     order_id: Number,
     quantity: Number,
     product_id: Number
-  ): Promise<OrderProduct[]> => {
+  ): Promise<OrderProduct> => {
     try {
       const conn = await Client.connect();
       const sql =
         'INSERT INTO order_product (order_id, quantity, product_id) VALUES($1, $2, $3) RETURNING *';
 
       const result = await conn.query(sql, [order_id, quantity, product_id]);
-      const orderproduct: OrderProduct[] = result.rows[0];
+      const orderproduct: OrderProduct = result.rows[0];
 
       conn.release();
 

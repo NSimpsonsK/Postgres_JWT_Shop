@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export type User = {
-  id?: Number;
+  id: Number;
   firstname: String;
   lastname: String;
   password: String;
@@ -33,17 +33,17 @@ export class UserStore {
     }
   }
 
-  async create(u: User): Promise<User> {
+  async create(firstname: String, lastname:String, password: String): Promise<User> {
     try {
       if (process.env.PEPPER) {
         const conn = await Client.connect();
         const sql =
           'INSERT INTO users (firstname, lastname, password_digest) VALUES($1, $2, $3) RETURNING *';
         const hash = bcrypt.hashSync(
-          (u.password + process.env.PEPPER) as string,
+          (password + process.env.PEPPER) as string,
           parseInt(process.env.SALT_ROUNDS as string)
         );
-        const result = await conn.query(sql, [u.firstname, u.lastname, hash]);
+        const result = await conn.query(sql, [firstname, lastname, hash]);
         const user = result.rows[0];
         user.password_digest="";
 
@@ -55,12 +55,12 @@ export class UserStore {
       }
     } catch (err) {
       throw new Error(
-        `unable create user (${u.firstname} ${u.lastname}): ${err}`
+        `unable create user (${firstname} ${lastname}): ${err}`
       );
     }
   }
 
-  async show(id: string): Promise<User> {
+  async show(id: Number): Promise<User> {
     try {
       const conn = await Client.connect();
       const sql = 'SELECT * FROM users WHERE id=($1)';
@@ -76,7 +76,7 @@ export class UserStore {
     }
   }
 
-  async authenticate(id: String, password: string): Promise<User | null> {
+  async authenticate(id: Number, password: string): Promise<User | null> {
     const conn = await Client.connect();
     const sql = 'SELECT password_digest FROM users WHERE id=($1)';
 
