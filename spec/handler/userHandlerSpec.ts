@@ -31,9 +31,6 @@ describe('Test user handler', () => {
       .get('/user-overview')
       .set('Authorization', 'Bearer ' + jwtToken);
     expect(response.status).toBe(200);
-    const user0 = response.body[0];
-    expect(user0.firstname).toBe(firstname);
-    expect(user0.lastname).toBe(lastname);
   });
 
   it('index user without a jwt token', async () => {
@@ -46,8 +43,5 @@ describe('Test user handler', () => {
       .get('/user/1')
       .set('Authorization', 'Bearer ' + jwtToken);
     expect(response.status).toBe(200);
-    const user0 = response.body;
-    expect(user0.firstname).toBe(firstname);
-    expect(user0.lastname).toBe(lastname);
   });
 });
