@@ -27,11 +27,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 - price
 - category
 
+The Schema can be found at [create-table-product](./migrations/sqls/20220216141510-product-table-up.sql).
+
 #### User
 - id
 - firstName
 - lastName
 - password
+
+
+The Schema can be found at [create-table-User](./migrations/sqls/20220216144644-user-table-up.sql).
 
 #### Orders
 - id
@@ -40,3 +45,5 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+
+The Schema can be found at [create-table-Order](./migrations/sqls/20220216145655-order-table-up.sql) and [create-table-OrderProduct](./migrations/sqls/20220216146517-orderproduct-table-up.sql).
