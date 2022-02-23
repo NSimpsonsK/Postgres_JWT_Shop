@@ -10,13 +10,18 @@ let jwtToken: String;
 
 //TS-Node fehlt noch und Order und Product Handler
 
+export const createUserAPI = async (): Promise<String> => {
+  const response = await request
+    .post('/user')
+    .send({ firstname: firstname, lastname: lastname, password: password });
+  jwtToken = response.body;
+  expect(response.status).toBe(200);
+  return jwtToken;
+};
+
 describe('Test user handler', () => {
   it('create new user', async () => {
-    const response = await request
-      .post('/user')
-      .send({ firstname: firstname, lastname: lastname, password: password });
-    jwtToken = response.body;
-    expect(response.status).toBe(200);
+    createUserAPI();
   });
 
   it('create user with incomplete info', async () => {
